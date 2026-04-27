@@ -61,15 +61,16 @@ if st.session_state.pantalla == "Inicio":
     if col2.button("Crear Cuenta", use_container_width=True): cambiar_pantalla("Registro")
 
 elif st.session_state.pantalla == "Registro":
-    st.title("📝 Crear Cuenta")
-    nombre = st.text_input("Nombre completo")
-    user = st.text_input("Usuario")
-    pw = st.text_input("Contraseña", type="password")
-    if st.button("Registrarme"):
-    if nombre and user and pw:
-      registrar_usuario(user, pw, nombre)
-     else:
-     st.warning("Por favor, llena todos los campos ⚠️")
+        st.title("📝 Crear Cuenta")
+        nombre = st.text_input("Nombre completo")
+        usuario = st.text_input("Usuario")
+        contraseña = st.text_input("Contraseña", type="password")
+        
+        if st.button("Regístreme"):
+            if nombre and usuario and contraseña:
+                registrar_usuario(usuario, contraseña, nombre)
+            else:
+                st.warning("Por favor, llena todos los campos ⚠️")
          
      try:
             c.execute('INSERT INTO usuarios VALUES (?,?,?)', (nombre, user, pw))
