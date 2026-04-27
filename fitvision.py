@@ -64,11 +64,13 @@ elif st.session_state.pantalla == "Registro":
         st.title("📝 Crear Cuenta")
         nombre = st.text_input("Nombre completo")
         usuario = st.text_input("Usuario")
-        contraseña = st.text_input("Contraseña", type="password")
+        pw = st.text_input("Contraseña", type="password")
         
-        if st.button("Regístreme"):
-            if nombre and usuario and contraseña:
-                registrar_usuario(usuario, contraseña, nombre)
+        if st.button("Registrarme"):
+            if nombre and usuario and pw:
+                registrar_usuario(usuario, pw, nombre)
+            else:
+                st.warning("Por favor, llena todos los campos ⚠️")
             else:
                 st.warning("Por favor, llena todos los campos ⚠️")
          
