@@ -63,14 +63,19 @@ if st.session_state.pantalla == "Inicio":
 elif st.session_state.pantalla == "Registro":
         st.title("📝 Crear Cuenta")
         nombre = st.text_input("Nombre completo")
-        usuario = st.text_input("Usuario")
+        user = st.text_input("Usuario")
         pw = st.text_input("Contraseña", type="password")
         
         if st.button("Registrarme"):
-            if nombre and usuario and pw:
-                registrar_usuario(usuario, pw, nombre)
+            if nombre and user and pw:
+                registrar_usuario(user, pw, nombre)
             else:
                 st.warning("Por favor, llena todos los campos ⚠️")
+        
+        # Este es el botón de la línea 81, ahora bien alineado
+        if st.button("Volver"):
+            st.session_state.pantalla = "Login"
+            st.rerun()
            
          
             c.execute('INSERT INTO usuarios VALUES (?,?,?)', (nombre, user, pw))
