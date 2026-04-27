@@ -1,24 +1,47 @@
 import streamlit as st
-import sqlite3
 import google.generativeai as genai
 from PIL import Image
+import firebase_admin
+from firebase_admin import credentials, firestore
 
+if not firebase_admin._apps:
+    cred_info = st.secrets["firebase_credentials"]
+    cred = credentials.Certificate(dict(cred_info))
+    firebase_admin.initialize_app(cred)
+
+db = firestore.client()
 # --- 1. CONFIGURACIÓN IA (GEMINI) ---
 # REEMPLAZA EL TEXTO DE ABAJO CON TU CLAVE REAL
 genai.configure(api_key="AIzaSyC5IhoVE1Bd8QUITjTHTWCnkZHfvBGNygg")
 model = genai.GenerativeModel('gemini-1.5-flash')
 st.set_page_config(page_title="FitVision AI", page_icon="🏋️‍♂️", layout="wide")
 
-# --- 2. BASE DE DATOS ---
-def crear_db():
-    conn = sqlite3.connect('usuarios_fitness.db')
-    c = conn.cursor()
-    c.execute('CREATE TABLE IF NOT EXISTS usuarios (nombre TEXT, usuario TEXT PRIMARY KEY, clave TEXT)')
-    c.execute('CREATE TABLE IF NOT EXISTS historial (usuario TEXT, fecha DATE, info TEXT)')
-    conn.commit()
-    conn.close()
+def registrar_usuario(usuario, password, nombre_real):
+    try:
+        user_ref = db.collection("usuarios").document(usuario)
+        user_ref.set({
+            "password": password,
+            "nombre": nombre_real,
+            "puntos": 0
+        })
+        st.success(f"¡Usuario {usuario} creado con éxito! ✅")
+        st.session_state.pantalla = "Login"
+    except Exception as e:
+        st.error(f"Error al guardar en la nube: {e}")
 
-crear_db()
+def validar_usuario(usuario, password):
+    try:
+        user_ref = db.collection("usuarios").document(usuario)
+        doc = user_ref.get()
+        if doc.exists:
+            datos = doc.to_dict()
+            if datos["password"] == password:
+                return True
+        return False
+    except Exception as e:
+        st.error(f"Error al conectar con la nube: {e}")
+        return False
+
 
 # --- 3. ESTADO DE SESIÓN ---
 if 'pantalla' not in st.session_state:
@@ -43,9 +66,12 @@ elif st.session_state.pantalla == "Registro":
     user = st.text_input("Usuario")
     pw = st.text_input("Contraseña", type="password")
     if st.button("Registrarme"):
-        conn = sqlite3.connect('usuarios_fitness.db')
-        c = conn.cursor()
-        try:
+    if nombre and user and pw:
+      registrar_usuario(user, pw, nombre)
+     else:
+     st.warning("Por favor, llena todos los campos ⚠️")
+         
+     try:
             c.execute('INSERT INTO usuarios VALUES (?,?,?)', (nombre, user, pw))
             conn.commit()
             st.success("¡Registro exitoso!")
