@@ -71,8 +71,7 @@ elif st.session_state.pantalla == "Registro":
                 registrar_usuario(usuario, pw, nombre)
             else:
                 st.warning("Por favor, llena todos los campos ⚠️")
-            else:
-                st.warning("Por favor, llena todos los campos ⚠️")
+           
          
      try:
             c.execute('INSERT INTO usuarios VALUES (?,?,?)', (nombre, user, pw))
