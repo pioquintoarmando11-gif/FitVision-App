@@ -96,8 +96,8 @@ elif st.session_state.pantalla == "Login":
         
        
         if st.button("Volver"):
-        st.session_state.pantalla = "Inicio"
-        st.rerun()
+            st.session_state.pantalla = "Inicio"
+            st.rerun()
 
 # --- 4. MENÚ PRINCIPAL (PANTALLA 3) ---
 elif st.session_state.pantalla == "Menu":
