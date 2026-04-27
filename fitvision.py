@@ -78,27 +78,26 @@ elif st.session_state.pantalla == "Registro":
             st.rerun()
            
          
-            c.execute('INSERT INTO usuarios VALUES (?,?,?)', (nombre, user, pw))
-            conn.commit()
-            st.success("¡Registro exitoso!")
-            cambiar_pantalla("Login")
-       
-    if st.button("Volver"): cambiar_pantalla("Inicio")
 
 elif st.session_state.pantalla == "Login":
     st.title("🔑 Entrar")
     user = st.text_input("Usuario")
     pw = st.text_input("Contraseña", type="password")
     if st.button("Ingresar"):
-        conn = sqlite3.connect('usuarios_fitness.db')
-        c = conn.cursor()
-        c.execute('SELECT * FROM usuarios WHERE usuario=? AND clave=?', (user, pw))
-        if c.fetchone():
+        # Verificamos los datos en la nube de Google
+        if validar_usuario(user, pw):
+            st.success(f"¡Bienvenido de nuevo, {user}! 👋")
             st.session_state.user = user
-            cambiar_pantalla("Menu")
-        else: st.error("Datos incorrectos")
-        conn.close()
-    if st.button("Volver"): cambiar_pantalla("Inicio")
+            st.session_state.logueado = True
+            st.session_state.pantalla = "Menu"
+            st.rerun()
+        else:
+            st.error("Usuario o contraseña incorrectos ❌")
+        
+       
+   if st.button("Volver"):
+        st.session_state.pantalla = "Inicio"
+        st.rerun()
 
 # --- 4. MENÚ PRINCIPAL (PANTALLA 3) ---
 elif st.session_state.pantalla == "Menu":
