@@ -77,8 +77,7 @@ elif st.session_state.pantalla == "Registro":
             conn.commit()
             st.success("¡Registro exitoso!")
             cambiar_pantalla("Login")
-        except: st.error("El usuario ya existe.")
-        conn.close()
+       
     if st.button("Volver"): cambiar_pantalla("Inicio")
 
 elif st.session_state.pantalla == "Login":
