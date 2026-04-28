@@ -13,7 +13,7 @@ db = firestore.client()
 # --- 1. CONFIGURACIÓN IA (GEMINI) ---
 # REEMPLAZA EL TEXTO DE ABAJO CON TU CLAVE REAL
 genai.configure(api_key="AIzaSyC5IhoVE1Bd8QUITjTHTWCnkZHfvBGNygg")
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel('gemini-pro')
 st.set_page_config(page_title="FitVision AI", page_icon="🏋️‍♂️", layout="wide")
 
 def registrar_usuario(usuario, password, nombre_real):
