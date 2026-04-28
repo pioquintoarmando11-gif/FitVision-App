@@ -132,19 +132,19 @@ elif st.session_state.pantalla == "Menu":
         # 2. El botón que activa a la IA
         if st.button("Generar mi rutina de hoy"):
             with st.spinner(f"El Coach IA está preparando tu rutina de {opcion_entrenamiento}..."):
-            try:
+                    try:
                 # 1. Definimos el mensaje
-                prompt_rutina = f"Crea una rutina de 5 ejercicios para {opcion_entrenamiento}. Para cada ejercicio dime: nombre, series, repeticiones y técnica."
+                        prompt_rutina = f"Crea una rutina de 5 ejercicios para {opcion_entrenamiento}. Para cada ejercicio dime: nombre, series, repeticiones y técnica."
                 
                 # 2. ESTA ES LA LÍNEA QUE FALTABA (La que conecta con Gemini)
-                res = model.generate_content(prompt_rutina)
+                        res = model.generate_content(prompt_rutina)
                 
                 # 3. Mostramos el resultado en pantalla
-                st.markdown(f"### 🔥 Rutina para {opcion_entrenamiento}")
-                st.write(res.text)
+                        st.markdown(f"### 🔥 Rutina para {opcion_entrenamiento}")
+                        st.write(res.text)
                 
-            except Exception as e:
-                st.error(f"La IA tuvo un problema: {e}")
+                    except Exception as e:
+                        st.error(f"La IA tuvo un problema: {e}")
                 
                 
 
