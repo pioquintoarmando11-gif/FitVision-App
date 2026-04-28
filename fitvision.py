@@ -127,7 +127,7 @@ elif st.session_state.pantalla == "Menu":
         st.header("📋 Tu Entrenamiento Personalizado")
         
         # 1. Aquí eliges qué parte del cuerpo trabajar
-       opcion_entrenamiento = st.selectbox("¿Qué quieres entrenar hoy?", ["Cuerpo Completo", "Pecho", "Pierna", "Espalda"])
+        opcion_entrenamiento = st.selectbox("¿Qué quieres entrenar hoy?", ["Cuerpo Completo", "Pecho", "Pierna", "Espalda"])
 
         # 2. El botón que activa a la IA
         if st.button("Generar mi rutina de hoy"):
