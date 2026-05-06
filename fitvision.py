@@ -134,8 +134,8 @@ elif st.session_state.pantalla == "Menu":
             with st.spinner("La IA está analizando tu plato..."):
                 prompt = f"Soy un usuario que pesa {peso}kg y mide {altura}cm. Analiza esta comida, estima calorías y proteínas, y dime si me conviene para mantenerme saludable. Sé breve."
                 response = model.generate_content([prompt, img])
-               st.markdown("### Resultado:")
-            st.write(response.text)
+                st.markdown("### Resultado:")
+                st.write(response.text)
     
     elif opcion == "💪 Mi Rutina":
         st.header("📋 Tu Entrenamiento Personalizado")
