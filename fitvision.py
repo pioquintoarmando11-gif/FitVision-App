@@ -138,7 +138,7 @@ elif st.session_state.pantalla == "Menu":
 
     
     
-   elif opcion == "💪 Mi Rutina":
+    elif opcion == "💪 Mi Rutina":
         st.header("📋 Tu Entrenamiento Personalizado")
 
         # PEGA AQUÍ EL DICCIONARIO (con 8 espacios de sangría)
