@@ -134,34 +134,39 @@ elif st.session_state.pantalla == "Menu":
             with st.spinner("La IA está analizando tu plato..."):
                 prompt = f"Soy un usuario que pesa {peso}kg y mide {altura}cm. Analiza esta comida, estima calorías y proteínas, y dime si me conviene para mantenerme saludable. Sé breve."
                 response = model.generate_content([prompt, img])
-                st.markdown("### Resultado:")
-                st.write(response.text)
+               
 
-    elif opcion == "💪 Mi Rutina":
+    
+    
+   elif opcion == "💪 Mi Rutina":
         st.header("📋 Tu Entrenamiento Personalizado")
+
+        # PEGA AQUÍ EL DICCIONARIO (con 8 espacios de sangría)
+        RUTINAS_AUTO = {
+            "Pecho": ["Lagartijas - 4x12", "Press con mancuernas - 4x10", "Aperturas - 3x15"],
+            "Pierna": ["Sentadillas - 4x12", "Desplantes - 3x15", "Peso muerto - 4x10"],
+            "Espalda": ["Dominadas - 4x10", "Remo con mancuerna - 4x12", "Jalón al pecho - 3x10"],
+            "Cuerpo Completo": ["Burpees - 3x10", "Sentadillas - 3x15", "Plancha - 3x45s"]
+        }
+
+        # Aquí sigue tu selectbox y el botón...
         
         # 1. Aquí eliges qué parte del cuerpo trabajar
         opcion_entrenamiento = st.selectbox("¿Qué quieres entrenar hoy?", ["Cuerpo Completo", "Pecho", "Pierna", "Espalda"])
-
-        # 2. El botón que activa a la IA
-        if st.button("Generar mi rutina de hoy"):
-            with st.spinner(f"El Coach IA está preparando tu rutina de {opcion_entrenamiento}..."):
-                    try:
-                # 1. Definimos el mensaje
-                        prompt_rutina = f"Crea una rutina de 5 ejercicios para {opcion_entrenamiento}. Para cada ejercicio dime: nombre, series, repeticiones y técnica."
-                
-                # 2. ESTA ES LA LÍNEA QUE FALTABA (La que conecta con Gemini)
-                        res = model.generate_content(prompt_rutina)
-                
-                # 3. Mostramos el resultado en pantalla
-                        st.markdown(f"### 🔥 Rutina para {opcion_entrenamiento}")
-                        st.write(res.text)
-                
-                    except Exception as e:
-                        st.error(f"La IA tuvo un problema: {e}")
+# 2. Botón para mostrar la rutina instantánea
+    if st.button("Generar mi rutina de hoy"):
+        # Buscamos en el diccionario lo que el usuario eligió
+        rutina_lista = RUTINAS_AUTO.get(opcion_entrenamiento, [])
+        
+        if rutina_lista:
+            st.markdown(f"### 🔥 Rutina para {opcion_entrenamiento}")
+            for ejercicio in rutina_lista:
+                st.write(f"✅ {ejercicio}")
+        else:
+            st.error("No se encontró la rutina.")
+       
                 
                 
-
     elif opcion == "💡 Consejos Fitness":
         st.header("🧠 Pregúntale al Coach IA")
         pregunta = st.text_input("¿Qué duda tienes hoy?")
