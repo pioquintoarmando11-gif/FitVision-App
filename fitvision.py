@@ -104,9 +104,23 @@ elif st.session_state.pantalla == "Menu":
     st.sidebar.title(f"Bienvenido, {st.session_state.user} 👋")
     opcion = st.sidebar.radio("Elige una opción:", ["🏠 Inicio", "🍎 Escáner de Comida", "💪 Mi Rutina", "📸 Mi Progreso", "💡 Consejos Fitness"])
     
+   # Bloque 1: Cerrar Sesión
     if st.sidebar.button("Cerrar Sesión"):
         st.session_state.user = None
         cambiar_pantalla("Inicio")
+
+    # Bloque 2: Eliminar Cuenta (FUERA del bloque anterior)
+    st.sidebar.markdown("---") 
+    if st.sidebar.button("⚠️ Eliminar Cuenta", type="primary"):
+        try:
+            db.collection("usuarios").document(st.session_state.user).delete()
+            st.session_state.user = None
+            # Agregamos esta línea para asegurar que se limpie el acceso
+            st.session_state.logueado = False 
+            cambiar_pantalla("Inicio")
+            st.rerun()
+        except Exception as e:
+            st.sidebar.error(f"Error: {e}")
 
     if opcion == "🏠 Inicio":
         st.header("🎯 Objetivo de hoy")
