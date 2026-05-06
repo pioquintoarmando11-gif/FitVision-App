@@ -140,7 +140,7 @@ elif st.session_state.pantalla == "Menu":
     elif opcion == "💪 Mi Rutina":
         st.header("📋 Tu Entrenamiento Personalizado")
 
-        # PEGA AQUÍ EL DICCIONARIO (con 8 espacios de sangría)
+        # El diccionario debe tener esta sangría (8 espacios desde el borde)
         RUTINAS_AUTO = {
             "Pecho": ["Lagartijas - 4x12", "Press con mancuernas - 4x10", "Aperturas - 3x15"],
             "Pierna": ["Sentadillas - 4x12", "Desplantes - 3x15", "Peso muerto - 4x10"],
@@ -148,21 +148,15 @@ elif st.session_state.pantalla == "Menu":
             "Cuerpo Completo": ["Burpees - 3x10", "Sentadillas - 3x15", "Plancha - 3x45s"]
         }
 
-        # Aquí sigue tu selectbox y el botón...
-        
-        # 1. Aquí eliges qué parte del cuerpo trabajar
+        # Estas líneas TAMBIÉN deben estar hacia la derecha
         opcion_entrenamiento = st.selectbox("¿Qué quieres entrenar hoy?", ["Cuerpo Completo", "Pecho", "Pierna", "Espalda"])
-# 2. Botón para mostrar la rutina instantánea
-    if st.button("Generar mi rutina de hoy"):
-        # Buscamos en el diccionario lo que el usuario eligió
-        rutina_lista = RUTINAS_AUTO.get(opcion_entrenamiento, [])
-        
-        if rutina_lista:
-            st.markdown(f"### 🔥 Rutina para {opcion_entrenamiento}")
-            for ejercicio in rutina_lista:
-                st.write(f"✅ {ejercicio}")
-        else:
-            st.error("No se encontró la rutina.")
+
+        if st.button("Generar mi rutina de hoy"):
+            rutina_lista = RUTINAS_AUTO.get(opcion_entrenamiento, [])
+            if rutina_lista:
+                st.markdown(f"### 🔥 Rutina para {opcion_entrenamiento}")
+                for ejercicio in rutina_lista:
+                    st.write(f"✅ {ejercicio}")
        
                 
                 
