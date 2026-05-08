@@ -161,37 +161,43 @@ elif st.session_state.pantalla == "Menu":
                 
                 
     elif opcion == "💡 Consejos Fitness":
-        st.header("🧠 Pregúntale al Coach IA")
-        
-      # 1. Catálogo de consejos (Alineado con el header)
-    CONSEJOS_FIT = {
-        "Pierde Grasa": [
-            "Mantén un déficit calórico ligero.",
-            "Prioriza el consumo de proteínas.",
-            "Camina al menos 10,000 pasos al día."
-        ],
-        "Gana Músculo": [
-            "Entrena con pesas 3-4 veces por semana.",
-            "Come suficiente proteína (1.5g por kilo).",
-            "El descanso es cuando el músculo crece."
-        ],
-        "Mantener Forma": [
-            "Bebe al menos 2-3 litros de agua al día.",
-            "Busca un equilibrio entre cardio y pesas.",
-            "La constancia es más importante que la intensidad."
-        ]
-    }
+        st.header("🌟 Consejos del Coach FitVision")
 
-    # 2. Selección del objetivo
-    objetivo = st.selectbox("¿Cuál es tu objetivo?", ["Pierde Grasa", "Gana Músculo", "Mantener Forma"])
+        # 1. Catálogo de consejos predeterminados
+        CONSEJOS_FIT = {
+            "Pierde Grasa": [
+                "Mantén un déficit calórico ligero (come un poco menos de lo que quemas).",
+                "Prioriza el consumo de proteínas para proteger tu músculo.",
+                "Aumenta tu actividad diaria: intenta caminar 10,000 pasos al día.",
+                "Duerme entre 7 y 8 horas; el descanso es clave para regular el hambre."
+            ],
+            "Gana Músculo": [
+                "Entrena con pesas o resistencia al menos 3 a 4 veces por semana.",
+                "Consume suficiente proteína (aprox. 1.8g por cada kilo de tu peso).",
+                "No ignores los carbohidratos; son la energía para tus entrenamientos.",
+                "Aumenta el peso gradualmente en tus ejercicios (sobrecarga progresiva)."
+            ],
+            "Mantener Forma": [
+                "Busca un equilibrio: combina ejercicios de fuerza con algo de cardio.",
+                "Mantente hidratado: bebe al menos 2 a 3 litros de agua diarios.",
+                "Sé constante: es mejor entrenar 30 minutos diario que 3 horas un solo día.",
+                "Escucha a tu cuerpo: si te sientes muy agotado, tómate un día de descanso."
+            ]
+        }
 
-    # 3. Botón para mostrar el consejo
-    if st.button("Obtener mi consejo de hoy"):
-        lista_consejos = CONSEJOS_FIT.get(objetivo, [])
-        if lista_consejos:
-            st.markdown(f"### ✨ Consejos para {objetivo}:")
-            for consejo in lista_consejos:
-                st.write(f"🔹 {consejo}")
+        # 2. Selector de objetivo (con sangría para que no se salga de la sección)
+        objetivo_seleccionado = st.selectbox("¿En qué área necesitas ayuda hoy?", list(CONSEJOS_FIT.keys()))
+
+        # 3. Botón para mostrar los consejos
+        if st.button("Obtener consejos ahora"):
+            consejos = CONSEJOS_FIT.get(objetivo_seleccionado, [])
+            
+            if consejos:
+                st.markdown(f"### ✨ Tips para {objetivo_seleccionado}:")
+                for item in consejos:
+                    st.write(f"✅ {item}")
+            else:
+                st.error("No se encontraron consejos para esta categoría.")
 
 elif opcion == "📸 Mi Progreso":
         st.header("⚖️ Mi Perfil Físico")
