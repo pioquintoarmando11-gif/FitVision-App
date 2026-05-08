@@ -185,7 +185,7 @@ elif st.session_state.pantalla == "Menu":
                 c2.metric("💪 Proteína", info['Prot'])
                 c3.metric("🥑 Grasa", info['Gras'])
                 
-                st.success(f"💡 **Tip del Coach:** {info['Nota']}"
+                st.success(f"💡 **Tip del Coach:** {info['Nota']}")
     
     elif opcion == "💪 Mi Rutina":
         st.header("📋 Tu Entrenamiento Personalizado")
