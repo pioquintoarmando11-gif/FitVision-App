@@ -127,15 +127,35 @@ elif st.session_state.pantalla == "Menu":
         st.write("Usa el menú de la izquierda para empezar a registrar tus avances.")
 
     elif opcion == "🍎 Escáner de Comida":
-        st.header("📸 Analizador de Nutrientes")
-        foto = st.camera_input("Toma una foto a tu plato")
-        if foto:
-            img = Image.open(foto)
-            with st.spinner("La IA está analizando tu plato..."):
-                prompt = f"Soy un usuario que pesa {peso}kg y mide {altura}cm. Analiza esta comida, estima calorías y proteínas, y dime si me conviene para mantenerme saludable. Sé breve."
-                response = model.generate_content([prompt, img])
-                st.markdown("### Resultado:")
-                st.write(response.text)
+        st.header("🍎 Analizador de Nutrientes")
+        st.write("Selecciona tu alimento para ver su información nutricional.")
+
+        # 1. Diccionario de alimentos predeterminados
+        ALIMENTOS = {
+            "Pollo a la plancha (100g)": {"Calorías": "165 kcal", "Proteína": "31g", "Grasa": "3.6g", "Nota": "Excelente fuente de proteína magra."},
+            "Arroz blanco (1 taza)": {"Calorías": "205 kcal", "Proteína": "4.3g", "Grasa": "0.4g", "Nota": "Buena fuente de energía (carbohidratos)."},
+            "Huevo hervido (1 unidad)": {"Calorías": "78 kcal", "Proteína": "6g", "Grasa": "5g", "Nota": "Contiene grasas saludables y vitaminas."},
+            "Manzana (1 pieza)": {"Calorías": "95 kcal", "Proteína": "0.5g", "Grasa": "0.3g", "Nota": "Alta en fibra y vitamina C."},
+            "Bubu-Lubu Mini": {"Calorías": "92 kcal", "Proteína": "0.6g", "Grasa": "3g", "Nota": "Consumo ocasional. Contiene azúcares añadidos."},
+            "Ensalada Mixta": {"Calorías": "45 kcal", "Proteína": "2g", "Grasa": "0.1g", "Nota": "Baja en calorías, ideal para volumen de comida."}
+        }
+
+        # 2. Selector de alimento
+        alimento_elegido = st.selectbox("¿Qué vas a comer hoy?", list(ALIMENTOS.keys()))
+
+        # 3. Mostrar la información
+        if st.button("Ver análisis nutricional"):
+            info = ALIMENTOS[alimento_elegido]
+            
+            st.markdown(f"### 📊 Resultado para: {alimento_elegido}")
+            
+            # Crear columnas para que se vea más profesional
+            col1, col2, col3 = st.columns(3)
+            col1.metric("🔥 Calorías", info["Calorías"])
+            col2.metric("💪 Proteína", info["Proteína"])
+            col3.metric("🥑 Grasa", info["Grasa"])
+            
+            st.info(f"💡 **Recomendación:** {info['Nota']}")
     
     elif opcion == "💪 Mi Rutina":
         st.header("📋 Tu Entrenamiento Personalizado")
