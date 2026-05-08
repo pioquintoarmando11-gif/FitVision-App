@@ -124,7 +124,7 @@ elif st.session_state.pantalla == "Menu":
 
     if opcion == "🏠 Inicio":
         st.header("🎯 Objetivo de hoy")
-        st.write("Usa el menú de la izquierda para empezar a registrar tus avances.")
+        st.write("Usa el menú de la izquierda para apoyarte de la mejor manera. SUERTE!.")
 
     elif opcion == "📊 Analizador de Nutrientes":
         st.header("📊 Analizador de Nutrientes")
