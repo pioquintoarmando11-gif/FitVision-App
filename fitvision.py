@@ -102,7 +102,7 @@ elif st.session_state.pantalla == "Login":
 # --- 4. MENÚ PRINCIPAL (PANTALLA 3) ---
 elif st.session_state.pantalla == "Menu":
     st.sidebar.title(f"Bienvenido, {st.session_state.user} 👋")
-    opcion = st.sidebar.radio("Elige una opción:", ["🏠 Inicio", "🍎 Escáner de Comida", "💪 Mi Rutina", "📸 Mi Progreso", "💡 Consejos Fitness"])
+    opcion = st.sidebar.radio("Elige una opción:", ["🏠 Inicio", "📊 Analizador de Nutrientes", "💪 Mi Rutina", "💡 Consejos"])
     
    # Bloque 1: Cerrar Sesión
     if st.sidebar.button("Cerrar Sesión"):
