@@ -130,7 +130,7 @@ elif st.session_state.pantalla == "Menu":
         st.header("📊 Analizador de Nutrientes")
         st.write("Selecciona un alimento de la lista para conocer su aporte nutricional por porción estándar.")
 
-        # 1. Catálogo extendido de 30 alimentos + los anteriores
+        # 1. Catálogo extendido de alimentos
         ALIMENTOS = {
             "Pollo a la plancha (100g)": {"Cal": "165", "Prot": "31g", "Gras": "3.6g", "Nota": "Proteína magra de alta calidad."},
             "Arroz blanco cocido (1 taza)": {"Cal": "205", "Prot": "4.3g", "Gras": "0.4g", "Nota": "Fuente principal de energía."},
@@ -156,7 +156,7 @@ elif st.session_state.pantalla == "Menu":
             "Queso Panela (40g)": {"Cal": "100", "Prot": "7g", "Gras": "8g", "Nota": "Opción de queso baja en grasa."},
             "Tortilla de maíz (1 pieza)": {"Cal": "50", "Prot": "1.4g", "Gras": "0.5g", "Nota": "Buena fuente de calcio."},
             "Crema de cacahuate (1 cda)": {"Cal": "95", "Prot": "4g", "Gras": "8g", "Nota": "Energética, cuidado con la porción."},
-            "Tofu (100g)": {"Cal": "76", "Prot": "8g", ",Gras": "4.8g", "Nota": "Proteína vegetal completa."},
+            "Tofu (100g)": {"Cal": "76", "Prot": "8g", "Gras": "4.8g", "Nota": "Proteína vegetal completa."},
             "Quinoa cocida (1/2 taza)": {"Cal": "110", "Prot": "4g", "Gras": "2g", "Nota": "Supercereal con aminoácidos."},
             "Zanahoria cruda (1 pieza)": {"Cal": "41", "Prot": "0.9g", "Gras": "0.2g", "Nota": "Vitamina A para la vista."},
             "Naranja (1 pieza)": {"Cal": "62", "Prot": "1.2g", "Gras": "0.2g", "Nota": "Vitamina C pura."},
@@ -169,19 +169,23 @@ elif st.session_state.pantalla == "Menu":
         # 2. Selector con búsqueda automática
         alimento_elegido = st.selectbox("Busca tu alimento:", sorted(list(ALIMENTOS.keys())))
 
-        # 3. Mostrar la ficha nutricional
-        if alimento_elegido:
-            info = ALIMENTOS[alimento_elegido]
-            st.write("---")
-            st.subheader(f"🔍 Ficha de: {alimento_elegido}")
-            
-            # Columnas estéticas
-            c1, c2, c3 = st.columns(3)
-            c1.metric("🔥 Calorías", f"{info['Cal']} kcal")
-            c2.metric("💪 Proteína", info['Prot'])
-            c3.metric("🥑 Grasa", info['Gras'])
-            
-            st.success(f"💡 **Tip del Coach:** {info['Nota']}")
+        # 3. Botón de analizar con efecto de carga
+        if st.button("🔍 Analizar alimento"):
+            with st.spinner("Buscando información nutricional..."):
+                import time
+                time.sleep(0.6) # Simula el proceso de análisis
+                
+                info = ALIMENTOS[alimento_elegido]
+                st.write("---")
+                st.subheader(f"📋 Ficha de: {alimento_elegido}")
+                
+                # Mostrar métricas en columnas
+                c1, c2, c3 = st.columns(3)
+                c1.metric("🔥 Calorías", f"{info['Cal']} kcal")
+                c2.metric("💪 Proteína", info['Prot'])
+                c3.metric("🥑 Grasa", info['Gras'])
+                
+                st.success(f"💡 **Tip del Coach:** {info['Nota']}"
     
     elif opcion == "💪 Mi Rutina":
         st.header("📋 Tu Entrenamiento Personalizado")
