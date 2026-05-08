@@ -132,12 +132,38 @@ elif st.session_state.pantalla == "Menu":
 
         # 1. Diccionario de alimentos predeterminados
         ALIMENTOS = {
-            "Pollo a la plancha (100g)": {"Calorías": "165 kcal", "Proteína": "31g", "Grasa": "3.6g", "Nota": "Excelente fuente de proteína magra."},
-            "Arroz blanco (1 taza)": {"Calorías": "205 kcal", "Proteína": "4.3g", "Grasa": "0.4g", "Nota": "Buena fuente de energía (carbohidratos)."},
-            "Huevo hervido (1 unidad)": {"Calorías": "78 kcal", "Proteína": "6g", "Grasa": "5g", "Nota": "Contiene grasas saludables y vitaminas."},
-            "Manzana (1 pieza)": {"Calorías": "95 kcal", "Proteína": "0.5g", "Grasa": "0.3g", "Nota": "Alta en fibra y vitamina C."},
-            "Bubu-Lubu Mini": {"Calorías": "92 kcal", "Proteína": "0.6g", "Grasa": "3g", "Nota": "Consumo ocasional. Contiene azúcares añadidos."},
-            "Ensalada Mixta": {"Calorías": "45 kcal", "Proteína": "2g", "Grasa": "0.1g", "Nota": "Baja en calorías, ideal para volumen de comida."}
+            "Pollo a la plancha (100g)": {"Cal": "165", "Prot": "31g", "Gras": "3.6g", "Nota": "Proteína magra de alta calidad."},
+            "Arroz blanco cocido (1 taza)": {"Cal": "205", "Prot": "4.3g", "Gras": "0.4g", "Nota": "Fuente principal de energía."},
+            "Huevo hervido (1 pieza)": {"Cal": "78", "Prot": "6g", "Gras": "5g", "Nota": "Proteína completa y grasas buenas."},
+            "Carne de res magra (100g)": {"Cal": "250", "Prot": "26g", "Gras": "15g", "Nota": "Rica en hierro y vitamina B12."},
+            "Salmón a la plancha (100g)": {"Cal": "208", "Prot": "22g", "Gras": "13g", "Nota": "Alto en Omega-3 para el corazón."},
+            "Atún en agua (1 lata)": {"Cal": "120", "Prot": "25g", "Gras": "1g", "Nota": "Práctico y muy alto en proteína."},
+            "Avena en hojuelas (1/2 taza)": {"Cal": "150", "Prot": "5g", "Gras": "3g", "Nota": "Excelente fibra para la digestión."},
+            "Pan integral (1 rebanada)": {"Cal": "80", "Prot": "4g", "Gras": "1g", "Nota": "Mejor opción que el pan blanco."},
+            "Leche descremada (1 taza)": {"Cal": "90", "Prot": "8g", "Gras": "0g", "Nota": "Aporta calcio y vitamina D."},
+            "Yogurt Griego natural (150g)": {"Cal": "100", "Prot": "15g", "Gras": "0g", "Nota": "Genial para la flora intestinal."},
+            "Frijoles cocidos (1/2 taza)": {"Cal": "110", "Prot": "7g", "Gras": "0.5g", "Nota": "Proteína vegetal y mucha fibra."},
+            "Lentejas cocidas (1/2 taza)": {"Cal": "115", "Prot": "9g", "Gras": "0.5g", "Nota": "Hierro y energía estable."},
+            "Aguacate (1/2 pieza)": {"Cal": "160", "Prot": "2g", "Gras": "15g", "Nota": "Grasas saludables necesarias."},
+            "Almendras (10 piezas)": {"Cal": "70", "Prot": "2.5g", "Gras": "6g", "Nota": "Snack saludable, controla el hambre."},
+            "Manzana (1 pieza)": {"Cal": "95", "Prot": "0.5g", "Gras": "0.3g", "Nota": "Fibra que da saciedad."},
+            "Plátano (1 pieza)": {"Cal": "105", "Prot": "1.3g", "Gras": "0.4g", "Nota": "Potasio para evitar calambres."},
+            "Pechuga de Pavo (3 rebanadas)": {"Cal": "60", "Prot": "12g", "Gras": "1g", "Nota": "Bajo en grasa, ideal para cenas."},
+            "Pasta cocida (1 taza)": {"Cal": "220", "Prot": "8g", "Gras": "1.3g", "Nota": "Carbohidrato para entrenos intensos."},
+            "Papa cocida (1 mediana)": {"Cal": "110", "Prot": "3g", "Gras": "0.1g", "Nota": "Más saciante que el arroz."},
+            "Brócoli al vapor (1 taza)": {"Cal": "31", "Prot": "2.5g", "Gras": "0.4g", "Nota": "Súper alimento lleno de vitaminas."},
+            "Espinacas crudas (2 tazas)": {"Cal": "14", "Prot": "2g", "Gras": "0.2g", "Nota": "Casi cero calorías, mucho volumen."},
+            "Queso Panela (40g)": {"Cal": "100", "Prot": "7g", "Gras": "8g", "Nota": "Opción de queso baja en grasa."},
+            "Tortilla de maíz (1 pieza)": {"Cal": "50", "Prot": "1.4g", "Gras": "0.5g", "Nota": "Buena fuente de calcio."},
+            "Crema de cacahuate (1 cda)": {"Cal": "95", "Prot": "4g", "Gras": "8g", "Nota": "Energética, cuidado con la porción."},
+            "Tofu (100g)": {"Cal": "76", "Prot": "8g", ",Gras": "4.8g", "Nota": "Proteína vegetal completa."},
+            "Quinoa cocida (1/2 taza)": {"Cal": "110", "Prot": "4g", "Gras": "2g", "Nota": "Supercereal con aminoácidos."},
+            "Zanahoria cruda (1 pieza)": {"Cal": "41", "Prot": "0.9g", "Gras": "0.2g", "Nota": "Vitamina A para la vista."},
+            "Naranja (1 pieza)": {"Cal": "62", "Prot": "1.2g", "Gras": "0.2g", "Nota": "Vitamina C pura."},
+            "Cacahuates naturales (1 puñado)": {"Cal": "160", "Prot": "7g", "Gras": "14g", "Nota": "Proteína y grasa saludable."},
+            "Bubu-Lubu Mini (1 pieza)": {"Cal": "92", "Prot": "0.6g", "Gras": "3g", "Nota": "Snack dulce ocasional."},
+            "Café negro (1 taza)": {"Cal": "2", "Prot": "0g", "Gras": "0g", "Nota": "Acelera el metabolismo sin calorías."},
+            "Galletas de arroz (2 piezas)": {"Cal": "70", "Prot": "1.5g", "Gras": "0.5g", "Nota": "Snack ligero para antes de entrenar."}
         }
 
         # 2. Selector de alimento
