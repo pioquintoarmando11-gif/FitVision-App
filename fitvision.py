@@ -180,7 +180,7 @@ elif st.session_state.pantalla == "Menu":
        
                 
                 
-    elif opcion == "💡 Consejos Fitness":
+    elif opcion == "💡 Consejos":
         st.header("🌟 Consejos del Coach FitVision")
 
         # 1. Catálogo de consejos predeterminados
