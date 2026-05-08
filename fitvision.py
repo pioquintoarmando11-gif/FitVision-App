@@ -162,10 +162,36 @@ elif st.session_state.pantalla == "Menu":
                 
     elif opcion == "💡 Consejos Fitness":
         st.header("🧠 Pregúntale al Coach IA")
-        pregunta = st.text_input("¿Qué duda tienes hoy?")
-        if pregunta:
-            res = model.generate_content(pregunta)
-            st.write(res.text)
+        
+      # 1. Catálogo de consejos (Alineado con el header)
+    CONSEJOS_FIT = {
+        "Pierde Grasa": [
+            "Mantén un déficit calórico ligero.",
+            "Prioriza el consumo de proteínas.",
+            "Camina al menos 10,000 pasos al día."
+        ],
+        "Gana Músculo": [
+            "Entrena con pesas 3-4 veces por semana.",
+            "Come suficiente proteína (1.5g por kilo).",
+            "El descanso es cuando el músculo crece."
+        ],
+        "Mantener Forma": [
+            "Bebe al menos 2-3 litros de agua al día.",
+            "Busca un equilibrio entre cardio y pesas.",
+            "La constancia es más importante que la intensidad."
+        ]
+    }
+
+    # 2. Selección del objetivo
+    objetivo = st.selectbox("¿Cuál es tu objetivo?", ["Pierde Grasa", "Gana Músculo", "Mantener Forma"])
+
+    # 3. Botón para mostrar el consejo
+    if st.button("Obtener mi consejo de hoy"):
+        lista_consejos = CONSEJOS_FIT.get(objetivo, [])
+        if lista_consejos:
+            st.markdown(f"### ✨ Consejos para {objetivo}:")
+            for consejo in lista_consejos:
+                st.write(f"🔹 {consejo}")
 
 elif opcion == "📸 Mi Progreso":
         st.header("⚖️ Mi Perfil Físico")
