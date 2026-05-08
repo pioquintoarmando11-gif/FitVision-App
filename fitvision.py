@@ -126,8 +126,8 @@ elif st.session_state.pantalla == "Menu":
         st.header("🎯 Objetivo de hoy")
         st.write("Usa el menú de la izquierda para empezar a registrar tus avances.")
 
-    elif opcion == "🍎 Escáner de Comida":
-        st.header("🍎 Analizador de Nutrientes")
+    elif opcion == "📊 Analizador de Nutrientes":
+        st.header("📊 Analizador de Nutrientes")
         st.write("Selecciona tu alimento para ver su información nutricional.")
 
         # 1. Diccionario de alimentos predeterminados
