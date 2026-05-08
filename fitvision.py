@@ -128,9 +128,9 @@ elif st.session_state.pantalla == "Menu":
 
     elif opcion == "📊 Analizador de Nutrientes":
         st.header("📊 Analizador de Nutrientes")
-        st.write("Selecciona tu alimento para ver su información nutricional.")
+        st.write("Selecciona un alimento de la lista para conocer su aporte nutricional por porción estándar.")
 
-        # 1. Diccionario de alimentos predeterminados
+        # 1. Catálogo extendido de 30 alimentos + los anteriores
         ALIMENTOS = {
             "Pollo a la plancha (100g)": {"Cal": "165", "Prot": "31g", "Gras": "3.6g", "Nota": "Proteína magra de alta calidad."},
             "Arroz blanco cocido (1 taza)": {"Cal": "205", "Prot": "4.3g", "Gras": "0.4g", "Nota": "Fuente principal de energía."},
@@ -166,22 +166,22 @@ elif st.session_state.pantalla == "Menu":
             "Galletas de arroz (2 piezas)": {"Cal": "70", "Prot": "1.5g", "Gras": "0.5g", "Nota": "Snack ligero para antes de entrenar."}
         }
 
-        # 2. Selector de alimento
-        alimento_elegido = st.selectbox("¿Qué vas a comer hoy?", list(ALIMENTOS.keys()))
+        # 2. Selector con búsqueda automática
+        alimento_elegido = st.selectbox("Busca tu alimento:", sorted(list(ALIMENTOS.keys())))
 
-        # 3. Mostrar la información
-        if st.button("Ver análisis nutricional"):
+        # 3. Mostrar la ficha nutricional
+        if alimento_elegido:
             info = ALIMENTOS[alimento_elegido]
+            st.write("---")
+            st.subheader(f"🔍 Ficha de: {alimento_elegido}")
             
-            st.markdown(f"### 📊 Resultado para: {alimento_elegido}")
+            # Columnas estéticas
+            c1, c2, c3 = st.columns(3)
+            c1.metric("🔥 Calorías", f"{info['Cal']} kcal")
+            c2.metric("💪 Proteína", info['Prot'])
+            c3.metric("🥑 Grasa", info['Gras'])
             
-            # Crear columnas para que se vea más profesional
-            col1, col2, col3 = st.columns(3)
-            col1.metric("🔥 Calorías", info["Calorías"])
-            col2.metric("💪 Proteína", info["Proteína"])
-            col3.metric("🥑 Grasa", info["Grasa"])
-            
-            st.info(f"💡 **Recomendación:** {info['Nota']}")
+            st.success(f"💡 **Tip del Coach:** {info['Nota']}")
     
     elif opcion == "💪 Mi Rutina":
         st.header("📋 Tu Entrenamiento Personalizado")
